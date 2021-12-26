@@ -62,7 +62,6 @@ public class WeatherClass
         protected void onPostExecute(Void unused)
         {
             super.onPostExecute(unused);
-            Log.d("MyLog", "TemperaturePost: " + temperature);
             tempAPI.displayTemp(temperature);
         }
 
@@ -125,7 +124,7 @@ public class WeatherClass
                     //humidity - sub_main_obj.getString("humidity")
 
                     //Assign dialog temp
-                    Log.d("MyLog", "Temperature: " + sub_main_obj.getString("temp"));
+                    //Log.d("MyLog", "Temperature: " + sub_main_obj.getString("temp"));
                     temperature = sub_main_obj.getString("temp");
 
                     //Assign dialog city name and state
