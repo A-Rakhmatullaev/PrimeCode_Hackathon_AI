@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
 
     Button playBtn;
+    Button button2;
     public int globalPos;
     protected static final int RESULT_SPEECH = 1;
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     public String dateVal;
 
     //API PART Vars
-
+    public String deleter;
 
 
     @Override
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
         //getTemperature
         initAfter();
-        
+
 
     }
 
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     {
         playBtn = findViewById(R.id.button);
         playBtn.getBackground().setAlpha(0);
+        button2 = findViewById(R.id.button2);
         viewPager2 = findViewById(R.id.view_pager);
         int [] images = {R.drawable.ic_clock, R.drawable.ic_calendar, R.drawable.ic_battery, R.drawable.ic_weather,
                         R.drawable.ic_location};
@@ -255,6 +257,15 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
                         break;
                     }
                 }
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                speaker(view);
             }
         });
     }
@@ -507,6 +518,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
     public void speaker(View view)
     {
+
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                         RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -528,6 +540,11 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
                 {
                     ArrayList<String> texts = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     Log.d("MyLog","OVERALL: " + texts.get(0));
+                    deleter = texts.get(0);
+                    if(deleter.toLowerCase().equals("harorat"))
+                    {
+                        getFromApi(tempVal);
+                    }
                 }
                 break;
             }
