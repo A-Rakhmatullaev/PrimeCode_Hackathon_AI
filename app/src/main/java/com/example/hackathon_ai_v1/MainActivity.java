@@ -18,7 +18,10 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     ViewPager2 viewPager2;
 
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
+
 
     //Weather Vars
     public static FusedLocationProviderClient fusedLocationProviderClient;
@@ -136,29 +140,29 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
                 {
                     case 0:
                     {
-                        getFromApi(timeVal);
+                        getFromApi("Hozirgi Vaqt");
                         break;
                     }
                     case 1:
                     {
-                        getFromApi(dateVal);
+                        getFromApi("Bugungi Sana");
                         break;
                     }
                     case 2:
                     {
-                        getFromApi(batteryVal);
+                        getFromApi("Hozirgi Quvvat");
                         break;
                     }
                     case 3:
                     {
                         if(tempVal!= null)
-                            getFromApi(tempVal);
+                            getFromApi("Bugungi Ob Havo");
                         else
                         {
                             try
                             {
                                 Thread.sleep(2000);
-                                getFromApi(tempVal);
+                                getFromApi("Ob Havo");
                             }
                             catch (InterruptedException e)
                             {
@@ -170,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
                     case 4:
                     {
-                        getFromApi(address);
+                        getFromApi("Hozirgi Manzil");
                         break;
                     }
                 }
