@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Hackathon_AI_V1</string>
+    <string name="time">Vaqt</string>
+    <string name="date">S\'ana</string>
+    <string name="battery">Quvvat</string>
+    <string name="street">Manzil</string>
+    <string name="weather">Ob-Havo</string>
+    <string name="SMS">SMS</string>
+
+    <string name="percent">Foiz</string>
+    <string name="degree">Gradus</string>
+    <string name="hour">Soat</string>
+    <string name="minute">Daqiqa</string>
+
+    <string name="mon">Dushanba</string>
+    <string name="tue">Seshanba</string>
+    <string name="wed">Chorshanba</string>
+    <string name="thu">Payshanba</string>
+    <string name="fri">Juma</string>
+    <string name="sat">Shanba</string>
+    <string name="sun">Yakshanba</string>
+
+    <string name="jan">Yanvar</string>
+    <string name="feb">Fevral</string>
+    <string name="mar">Mart</string>
+    <string name="apr">Aprel</string>
+    <string name="may">May</string>
+    <string name="jun">Iyun</string>
+    <string name="jul">Iyul</string>
+    <string name="aug">Avgust</string>
+    <string name="sep">Sentyabr</string>
+    <string name="oct">Oktyabr</string>
+    <string name="nov">Noyabr</string>
+    <string name="dec">Dekabr</string>
+
+</resources>

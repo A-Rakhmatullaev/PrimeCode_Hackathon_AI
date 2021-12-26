@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Hackathon_AI_V1</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="battery">Battery</string>
+    <string name="street">Street</string>
+    <string name="weather">Weather</string>
+    <string name="SMS">SMS</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="percent">Percent</string>
+    <string name="degree">Degree</string>
+    <string name="hour">Hour</string>
+    <string name="minute">Minute</string>
+
+    <string name="mon">Monday</string>
+    <string name="tue">Tuesday</string>
+    <string name="wed">Wednesday</string>
+    <string name="thu">Thursday</string>
+    <string name="fri">Friday</string>
+    <string name="sat">Saturday</string>
+    <string name="sun">Sunday</string>
+
+    <string name="jan">January</string>
+    <string name="feb">February</string>
+    <string name="mar">March</string>
+    <string name="apr">April</string>
+    <string name="may">May</string>
+    <string name="jun">June</string>
+    <string name="jul">July</string>
+    <string name="aug">August</string>
+    <string name="sep">September</string>
+    <string name="oct">October</string>
+    <string name="nov">November</string>
+    <string name="dec">December</string>
+</resources>
