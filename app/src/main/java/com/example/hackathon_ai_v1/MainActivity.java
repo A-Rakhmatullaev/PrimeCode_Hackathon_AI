@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
         //API PART for On-Create
 
         //put sound on each swipe
-        getFromApi(batteryVal);
 
         //getTemperature
 
@@ -350,7 +349,9 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     @Override
     public void displayTemp(String temp)
     {
-        tempVal = temp;
+        tempVal = getString(R.string.today) + " " + getString(R.string.harorat)
+                + " " + temp + " " + getString(R.string.degree);
+        getFromApi(tempVal);
         Log.d("MyLog", "MAINTEMP: " + tempVal);
     }
 }

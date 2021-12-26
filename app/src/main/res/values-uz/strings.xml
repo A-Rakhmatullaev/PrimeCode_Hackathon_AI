@@ -6,6 +6,8 @@
     <string name="street">Manzil</string>
     <string name="weather">Ob-Havo</string>
     <string name="SMS">SMS</string>
+    <string name="harorat">Harorat</string>
+    <string name="today">Bugun</string>
 
     <string name="percent">Foiz</string>
     <string name="degree">Gradus</string>
