@@ -43,6 +43,12 @@ public class WeatherClass
     {
        this.CITY_NAME_STRING = CITY_NAME_STRING;
     }
+
+    TempAPI tempAPI;
+    public void setTempAPI(TempAPI tempAPI)
+    {
+        this.tempAPI = tempAPI;
+    }
     //Vars for adding city
     public void startEngine()
     {
@@ -52,11 +58,18 @@ public class WeatherClass
 
     private class SearchOWMEngine extends AsyncTask<String, Void, Void>
     {
+        @Override
+        protected void onPostExecute(Void unused)
+        {
+            super.onPostExecute(unused);
+            Log.d("MyLog", "TemperaturePost: " + temperature);
+            tempAPI.displayTemp(temperature);
+        }
 
         @Override
         protected Void doInBackground(String... strings)
         {
-            String MAIN_URL_METRIC_STRING = "https://api.openweathermap.org/data/2.5/weather?q="+strings[0]+"&units="+units+"&appid="+API_KEY_STRING;
+            String MAIN_URL_METRIC_STRING = "https://api.openweathermap.org/data/2.5/weather?q="+"Tashkent"+"&units="+units+"&appid="+API_KEY_STRING;
             try
             {
                 //assign value for URL
@@ -134,6 +147,11 @@ public class WeatherClass
             return null;
         }
 
+    }
+
+    public interface TempAPI
+    {
+        void displayTemp(String temp);
     }
 
 

@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements WeatherClass.TempAPI
 {
     //main viewpager, containing all other functions
     ViewPager2 viewPager2;
@@ -175,11 +175,14 @@ public class MainActivity extends AppCompatActivity
                       // MAIN_URL_METRIC_STRING = "https://api.openweathermap.org/data/2.5/weather?q=" + CITY_NAME_STRING + "&units=" + units + "&appid=" + API_KEY_STRING;
                         WeatherClass weatherClass = new WeatherClass(addresses.get(0).getLocality());
                         weatherClass.startEngine();
+                        weatherClass.setTempAPI(MainActivity.this);
+
 
                         //Log.d("MyLog", temp);
 
                         address = addresses.get(0).getAddressLine(0);
                         Log.d("MyLog","Address: " + address);
+
 
 
 
@@ -342,5 +345,12 @@ public class MainActivity extends AppCompatActivity
     {
         ApiCaller apiCaller = new ApiCaller(inputStr, this);
         apiCaller.startEngine();
+    }
+
+    @Override
+    public void displayTemp(String temp)
+    {
+        tempVal = temp;
+        Log.d("MyLog", "MAINTEMP: " + tempVal);
     }
 }
