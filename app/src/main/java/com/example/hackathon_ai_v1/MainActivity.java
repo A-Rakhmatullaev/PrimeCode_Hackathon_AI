@@ -1,6 +1,7 @@
 package com.example.hackathon_ai_v1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -16,6 +18,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
     Button playBtn;
     public int globalPos;
+    protected static final int RESULT_SPEECH = 1;
+
     //Weather Vars
     public static FusedLocationProviderClient fusedLocationProviderClient;
     public static String tempVal;
@@ -74,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
         setContentView(R.layout.activity_main);
         //input views
+
         Initialization();
 
 
@@ -101,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
         //getTemperature
         initAfter();
+        
 
     }
 
@@ -108,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     public void Initialization()
     {
         playBtn = findViewById(R.id.button);
+        playBtn.getBackground().setAlpha(0);
         viewPager2 = findViewById(R.id.view_pager);
         int [] images = {R.drawable.ic_clock, R.drawable.ic_calendar, R.drawable.ic_battery, R.drawable.ic_weather,
                         R.drawable.ic_location};
@@ -496,4 +504,34 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 //
 //    }
 
+
+    public void speaker(View view)
+    {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "uz");
+
+
+        startActivityForResult(intent, RESULT_SPEECH);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case RESULT_SPEECH:
+            {
+                if(resultCode == RESULT_OK && data!=null)
+                {
+                    ArrayList<String> texts = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Log.d("MyLog","OVERALL: " + texts.get(0));
+                }
+                break;
+            }
+        }
+
+    }
 }
