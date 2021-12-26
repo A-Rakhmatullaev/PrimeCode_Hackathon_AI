@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.lang.Object;
 
 public class MainActivity extends AppCompatActivity implements WeatherClass.TempAPI
 {
@@ -121,6 +123,65 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(2);
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                switch (position)
+                {
+                    case 0:
+                    {
+                        getFromApi(timeVal);
+                        break;
+                    }
+                    case 1:
+                    {
+                        getFromApi(dateVal);
+                        break;
+                    }
+                    case 2:
+                    {
+                        getFromApi(batteryVal);
+                        break;
+                    }
+                    case 3:
+                    {
+                        if(tempVal!= null)
+                            getFromApi(tempVal);
+                        else
+                        {
+                            try
+                            {
+                                Thread.sleep(2000);
+                                getFromApi(tempVal);
+                            }
+                            catch (InterruptedException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                        break;
+                    }
+
+                    case 4:
+                    {
+                        getFromApi(address);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+
 
 
     }
@@ -334,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
             }
 
         }
-        dateVal = currentDate1 + " "+ currentDate3 + ", " + currentDate2;
+        dateVal = getString(R.string.today) + " " + currentDate1 + " "+ currentDate3 + " " + currentDate2;
         Log.d("MyLog", "Date: " + dateVal);
     }
 
@@ -349,9 +410,19 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
     @Override
     public void displayTemp(String temp)
     {
-        tempVal = getString(R.string.today) + " " + getString(R.string.harorat)
+        tempVal = getString(R.string.now) + " " + getString(R.string.harorat)
                 + " " + temp + " " + getString(R.string.degree);
-        getFromApi(tempVal);
         Log.d("MyLog", "MAINTEMP: " + tempVal);
     }
+
+//    public static abstract class OnPageChangeCallback extends Object
+//    {
+//        public OnPageChangeCallback (){}
+//
+//        public void onPageScrollStateChanged (int state){}
+//
+//        public void onPageSelected (int position){}
+//
+//    }
+
 }
