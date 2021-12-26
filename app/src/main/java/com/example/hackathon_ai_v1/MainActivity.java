@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
 
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
 
-
+    Button playBtn;
+    public int globalPos;
     //Weather Vars
     public static FusedLocationProviderClient fusedLocationProviderClient;
     public static String tempVal;
@@ -99,13 +100,14 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
         //put sound on each swipe
 
         //getTemperature
-
+        initAfter();
 
     }
 
     //get all views from this method
     public void Initialization()
     {
+        playBtn = findViewById(R.id.button);
         viewPager2 = findViewById(R.id.view_pager);
         int [] images = {R.drawable.ic_clock, R.drawable.ic_calendar, R.drawable.ic_battery, R.drawable.ic_weather,
                         R.drawable.ic_location};
@@ -136,33 +138,42 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                globalPos = position;
+                Log.d("MyLog","globalIN: " + globalPos);
                 switch (position)
                 {
                     case 0:
                     {
                         getFromApi("Hozirgi Vaqt");
+                        playBtn.setClickable(true);
                         break;
                     }
                     case 1:
                     {
                         getFromApi("Bugungi Sana");
+                        playBtn.setClickable(true);
                         break;
                     }
                     case 2:
                     {
                         getFromApi("Hozirgi Quvvat");
+                        playBtn.setClickable(true);
                         break;
                     }
                     case 3:
                     {
                         if(tempVal!= null)
+                        {
                             getFromApi("Bugungi Ob Havo");
+                            playBtn.setClickable(true);
+                        }
                         else
                         {
                             try
                             {
                                 Thread.sleep(2000);
                                 getFromApi("Ob Havo");
+                                playBtn.setClickable(true);
                             }
                             catch (InterruptedException e)
                             {
@@ -175,9 +186,12 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
                     case 4:
                     {
                         getFromApi("Hozirgi Manzil");
+                        playBtn.setClickable(true);
                         break;
                     }
                 }
+                Log.d("MyLog","globalOUT: " + globalPos);
+
             }
 
             @Override
@@ -187,8 +201,61 @@ public class MainActivity extends AppCompatActivity implements WeatherClass.Temp
         });
 
 
-
     }
+    /////////PLAY SOUND ON BUTTON
+    public void initAfter()
+    {
+        Log.d("MyLog","globalEND: " + globalPos);
+        playBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                switch (globalPos)
+                {
+                    case 0:
+                    {
+                        getFromApi(timeVal);
+                        playBtn.setClickable(false);
+                        break;
+                    }
+                    case 1:
+                    {
+                        getFromApi(dateVal);
+                        playBtn.setClickable(false);
+                        break;
+                    }
+                    case 2:
+                    {
+                        getFromApi(batteryVal);
+                        playBtn.setClickable(false);
+                        break;
+                    }
+                    case 3:
+                    {
+
+                        getFromApi(tempVal);
+                        playBtn.setClickable(false);
+
+                        break;
+                    }
+
+                    case 4:
+                    {
+                        getFromApi(address);
+                        playBtn.setClickable(false);
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
 
     //method to setup any locale
     protected void setAppLocale(String localeCode)
